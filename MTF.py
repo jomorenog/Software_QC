@@ -1,9 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[1]:
-
-
 import numpy as np
 import cv2 as cv
 import statsmodels.api as sm 
@@ -17,35 +11,18 @@ def gauss(x,A,mu,sigma):
 def fermi(x,a0,a1,c1,c2):
     return a0+a1*(1/(1+np.exp(c1*(x-c2))))
 
-
-# In[8]:
-
-
-
 angle=0
 
 def Get_ESF(image):
     #img= cv.cvtColor(image, cv.COLOR_BGR2GRAY)
     img=image
     
-    
-    
     img= cv.GaussianBlur(img, (3, 3), 0)  # simple noise removal
     p,im_thr=cv.threshold(img, 0.6*np.max(img), np.max(img), cv.THRESH_BINARY)
     img_c=np.uint8(im_thr)
-    #img_c=im_thr
- 
     
-    #img_c= cv.GaussianBlur(img_c, (3, 3), 0)  # simple noise removal
-    
-    
-    #img_c = cv.GaussianBlur(im_thr, (5, 5), 1)  # simple noise removal
-    #img_c= cv.GaussianBlur(img_c, (7, 7), 1) 
     edges = cv.Canny(img_c,0.2*np.max(img_c),0.8*np.max(img_c))
     parameters=np.polyfit(*reversed(np.nonzero(edges)), deg=1)
-    plt.imshow(img_c)
-    plt.colorbar()
-    plt.show()
     line=np.nonzero(edges)
     y=line[0][-1]-line[0][0]
     x=line[1][0]-line[1][-1]
@@ -127,19 +104,7 @@ def Get_LSF(x_val, popt):
 
 
 def Get_MTF(x_val, lsf,print_image=False):
-    #n=4#np.cos(angle)
-    #z_ran=(z[-1]-z[0])//n
-    #z_max=n*z_ran
-    #px=1/(1*(x_val[len(x_val)//2]-x_val[0]))
-    #N=len(lsf)
-    #T=0.25
-    #fft1=np.abs(fft(lsf[:]))
     fft1_g=np.abs(fft(lsf))
-    #fft1_g=np.abs(fft(gauss(x_val,*popt_g)))
-    #N_g=len(fft1_g)
-    #xf = fftfreq(N, T)[:N//2]
-    #x_mtf=1*np.arange(0, N)*px
-    #x_mtf_g=1*np.arange(0, N_g)*px
     mtf=abs(fft1_g[:len(fft1_g)//2]/fft1_g[0])
     x_mtf=np.arange(0,len(mtf))/len(mtf)
     MTF_50=np.interp(0.5,mtf[::-1],x_mtf[::-1])

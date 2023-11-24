@@ -1,9 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[5]:
-
-
 import numpy as np
 import scipy.signal 
 import cv2 as cv
@@ -13,11 +7,6 @@ from matplotlib.patches import Rectangle
 from PIL import Image
 import pydicom as dm
 import MTF
-#plt.rcParams['text.usetex'] = True
-
-
-# In[41]:
-
 
 
 def fun_profile(image, axes):
@@ -279,23 +268,6 @@ def find_ROIs(image, px_size ,print_img=False):
 
     
     prof_y=fun_profile(image, 'y')
-#     plt.plot(prof_y,'k')
-#     plt.plot(np.arange(350,510),prof_y[350:510],'r')
-#     plt.plot(np.arange(900,1750),prof_y[900:1750],'r')
-#     plt.plot(np.arange(3100,3400),prof_y[3100:3400],'r')
-#     plt.plot(np.arange(3900,4060),prof_y[3900:4060],'r')
-#     plt.arrow(420,1100,0,-300, head_width=50, color='k')
-#     plt.arrow(4000,1100,-300,-300, head_width=50, color='k')
-#     plt.text(3070,500,'Borde\n del simulador', fontsize=14)
-#     plt.text(300,460,'Etiqueta de \n imagen', fontsize=14, color='k')
-#     plt.text(1200,1300,r'Cu', fontsize=16, color='r')
-#     plt.text(3190,1250,r'Al', fontsize=16, color='r')
-#     plt.xticks(fontsize=14)
-#     plt.yticks(fontsize=14)
-#     plt.xlabel('Pixel',fontsize=14)
-#     plt.ylabel('Intensidad',fontsize=14)
-#     plt.savefig('perfilII_intensidad.pdf')
-#     plt.show()
     hiCu_y, hfCu_y=find_Cu(prof_y, 0.1)
     
     hAl_x, hAl_y=find_Al(image)
@@ -380,41 +352,7 @@ def find_ROIs(image, px_size ,print_img=False):
     }
     
     
-    #return MTF_50, MTF_20, MTF_Ny, SNR_bg, SNR_al, SDNR
     return IMAGE_PARAM
-
-# file='FNXK0SN3\ZNXK0T2Z\I5200000'    
-# dcs=dm.dcmread(file)
-# img=dcs.pixel_array
-# img=plt.imread('8g.png')
-# img= cv.cvtColor(img, cv.COLOR_BGRA2GRAY) 
-# print(img.shape)
-
-# MTF.measure_MTF(img, plot=True)
-#find_ROIs(img, print_img=True)
-
-
-# In[42]:
-
-
-#M50,M20,Mn, sb, sa, sd=find_ROIs(img,float(dcs[0x0018, 0x1164].value[0]), print_img=True)
-#find_ROIs(img,float(dcs[0x0018, 0x1164].value[0]), print_img=False)
-
-
-# In[25]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
 
 
 
