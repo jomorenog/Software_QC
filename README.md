@@ -11,7 +11,7 @@ Este programa está diseñado para realizar las mediciones de MTF, SNR y SDNR; a
 
 Sea *img_name* el nombre del archivo de la imagen DICOM.
 
-Sea *fname* el nombre del atchivo csv donde quiere almacenar los datos.
+Sea *fname* el nombre del archivo csv donde quiere almacenar los datos.
 
 Ejecute el programa como:
 
