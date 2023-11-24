@@ -7,7 +7,7 @@ Este programa está diseñado para realizar las mediciones de MTF, SNR y SDNR; a
 ## Librerias necesarias:
  pydicom, matplotlib, pandas, numpy, sys, os, cv2, scipy, pillow
 
-## Ejecucio:
+## Ejecucion:
 
 Sea *img_name* el nombre del archivo de la imagen DICOM.
 
